@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>License Admin</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+    <div class="container topbar-inner">
+        <div>
+            <h1>License Console</h1>
+            <p class="muted">Create, monitor, and revoke extension licenses.</p>
+        </div>
+        <form action="/logout" method="post">
+            <button class="ghost" type="submit">Logout</button>
+        </form>
+    </div>
+</header>
+
+<main class="container page">
+    <section class="grid cards">
+        <div class="card metric">
+            <p class="muted">Total</p>
+            <h2>{{ stats.total }}</h2>
+        </div>
+        <div class="card metric success">
+            <p class="muted">Active</p>
+            <h2>{{ stats.active }}</h2>
+        </div>
+        <div class="card metric warn">
+            <p class="muted">Inactive</p>
+            <h2>{{ stats.inactive }}</h2>
+        </div>
+        <div class="card metric danger">
+            <p class="muted">Expired</p>
+            <h2>{{ stats.expired }}</h2>
+        </div>
+    </section>
+
+    <section class="card form-card">
+        <div class="section-header">
+            <h2>New License</h2>
+            <p class="muted">Provide username and license key to create instantly.</p>
+        </div>
+        <form action="/admin/licenses/create" method="post" class="grid form-grid">
+            <label>
+                Username
+                <input type="text" name="username" placeholder="username" required>
+            </label>
+            <label>
+                License Key
+                <input type="text" name="license_key" placeholder="paste or generate" required>
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" name="active" checked>
+                Active
+            </label>
+            <button type="submit" class="primary">Create</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <div class="section-header">
+            <h2>Licenses</h2>
+            <p class="muted">Latest first. Toggle or delete as needed.</p>
+        </div>
+        {% if licenses %}
+            <div class="table">
+                <div class="table-head">
+                    <span>ID</span>
+                    <span>Username</span>
+                    <span>Token</span>
+                    <span>Status</span>
+                    <span>Created</span>
+                    <span>Actions</span>
+                </div>
+                {% for lic in licenses %}
+                    <div class="table-row">
+                        <span>{{ lic.id }}</span>
+                        <span>{{ lic.username }}</span>
+                        <span class="mono">{{ lic.token }}</span>
+                        <span>
+                            {% if lic.active %}
+                                <span class="badge success">Active</span>
+                            {% else %}
+                                <span class="badge danger">Inactive</span>
+                            {% endif %}
+                        </span>
+                        <span>{{ lic.created_at }}</span>
+                        <span class="actions">
+                            <form action="/admin/licenses/{{ lic.id }}/toggle" method="post">
+                                <button type="submit" class="secondary">
+                                    {% if lic.active %}Deactivate{% else %}Activate{% endif %}
+                                </button>
+                            </form>
+                            <form action="/admin/licenses/{{ lic.id }}/delete" method="post" onsubmit="return confirm('Delete license {{ lic.token }}?');">
+                                <button type="submit" class="danger">Delete</button>
+                            </form>
+                        </span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="muted">No licenses yet. Create the first one above.</p>
+        {% endif %}
+    </section>
+</main>
+
+<footer>
+    <div class="container muted">License Server • FastAPI + SQLite</div>
+</footer>
+</body>
+</html>
+

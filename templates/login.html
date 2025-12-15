@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Login • License Console</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="login-body">
+<div class="login-card">
+    <h1>License Console</h1>
+    <p class="muted">Enter admin password to continue</p>
+    {% if error %}
+        <div class="alert">{{ error }}</div>
+    {% endif %}
+    <form action="/login" method="post" class="login-form">
+        <input type="password" name="password" placeholder="Admin password" required>
+        <button type="submit" class="primary full">Login</button>
+    </form>
+</div>
+</body>
+</html>
+

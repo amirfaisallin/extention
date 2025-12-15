@@ -1,0 +1,154 @@
+:root {
+    --bg: #0b1220;
+    --panel: #0f172a;
+    --card: #111827;
+    --border: #1f2937;
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+    --accent: #22d3ee;
+    --accent-2: #6366f1;
+    --danger: #ef4444;
+    --warn: #f59e0b;
+    --success: #22c55e;
+}
+
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    background: radial-gradient(circle at 10% 10%, #1f2937 0, #0b1220 40%);
+    color: var(--text);
+}
+a { color: var(--accent); text-decoration: none; }
+
+.container { width: min(1200px, 94vw); margin: 0 auto; }
+
+.topbar {
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+}
+.topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+h1, h2 { margin: 0; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+
+.page { padding: 24px 0 64px; display: grid; gap: 16px; }
+
+.grid { display: grid; gap: 12px; }
+.cards { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+}
+
+.metric h2 { font-size: 28px; margin-top: 6px; }
+.metric.success { border-color: rgba(34, 197, 94, 0.35); }
+.metric.warn { border-color: rgba(245, 158, 11, 0.35); }
+.metric.danger { border-color: rgba(239, 68, 68, 0.35); }
+
+.form-card .form-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.section-header { margin-bottom: 12px; }
+
+label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--muted); }
+input, select {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #0b1220;
+    color: var(--text);
+    font-size: 14px;
+}
+
+.checkbox { flex-direction: row; align-items: center; gap: 8px; }
+.checkbox input { width: 16px; height: 16px; }
+
+button {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background: #1f2937;
+    color: var(--text);
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.05s ease, box-shadow 0.1s ease;
+}
+button:hover { transform: translateY(-1px); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+button.primary { background: linear-gradient(135deg, var(--accent-2), var(--accent)); color: #0b1220; }
+button.secondary { background: #111827; border-color: var(--border); }
+button.danger { background: #7f1d1d; border-color: #991b1b; color: #fecaca; }
+button.ghost { background: transparent; border-color: var(--border); color: var(--text); }
+button.full { width: 100%; }
+
+.table { display: grid; gap: 8px; }
+.table-head, .table-row {
+    display: grid;
+    grid-template-columns: 50px 1fr 2fr 1fr 1.2fr 1.4fr;
+    align-items: center;
+    gap: 10px;
+}
+.table-head { font-weight: 700; color: var(--muted); }
+.table-row {
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #0b1220;
+}
+.mono { font-family: "JetBrains Mono", "SFMono-Regular", Menlo, monospace; font-size: 13px; word-break: break-all; }
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+}
+.badge.success { background: rgba(34, 197, 94, 0.12); color: #bbf7d0; }
+.badge.danger { background: rgba(239, 68, 68, 0.12); color: #fecaca; }
+.badge.warn { background: rgba(245, 158, 11, 0.12); color: #fcd34d; }
+
+.actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.actions form { display: inline-block; margin: 0; }
+
+footer {
+    background: var(--panel);
+    border-top: 1px solid var(--border);
+    padding: 14px 0;
+    text-align: center;
+    color: var(--muted);
+}
+
+/* Login */
+.login-body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    background: radial-gradient(circle at 20% 20%, #1f2937 0, #0b1220 40%);
+}
+.login-card {
+    width: min(360px, 92vw);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+}
+.login-form { display: grid; gap: 12px; margin-top: 12px; }
+.alert {
+    background: rgba(239, 68, 68, 0.15);
+    color: #fecdd3;
+    border: 1px solid #991b1b;
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-top: 10px;
+}
+
